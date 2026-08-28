@@ -1,3 +1,4 @@
+import { PageBackground } from "@/components/visual/PageBackground";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -10,6 +11,7 @@ import { Cta } from "@/components/sections/Cta";
 export default function Home() {
   return (
     <>
+      <PageBackground />
       <Header />
       <main>
         <Hero />

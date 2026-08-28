@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { PageBackground } from "@/components/visual/PageBackground";
 import "./globals.css";
 
 /** Matches the geometric wordmark in the logo lockup. */
@@ -27,10 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${poppins.variable} h-full`}>
-      <body className="flex min-h-full flex-col">
-        <PageBackground />
-        {children}
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

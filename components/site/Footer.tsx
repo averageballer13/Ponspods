@@ -1,4 +1,5 @@
 import { Logo } from "@/components/ui";
+import { SocialLinks } from "@/components/site/SocialLinks";
 
 const LINKS = [
   { label: "dApp", href: "/app" },
@@ -6,7 +7,6 @@ const LINKS = [
   { label: "Why stocks", href: "/#why" },
   { label: "Pods", href: "/#pods" },
   { label: "Robinhood Chain", href: "https://docs.robinhood.com/chain/" },
-  { label: "Peapods Finance", href: "https://peapods.finance" },
 ];
 
 export function Footer() {
@@ -27,11 +27,15 @@ export function Footer() {
             ))}
           </nav>
         </div>
-        <p className="max-w-3xl text-sm leading-relaxed text-white/30">
-          Ponspods is a concept project. Nothing here is live and nothing here is investment advice.
-          Company names and logos are trademarks of their respective owners, used only to identify
-          the underlying company of a tokenized stock.
-        </p>
+
+        <div className="border-line/60 flex flex-col gap-6 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm leading-relaxed text-white/30">
+            Ponspods is a concept project. Nothing here is live and nothing here is investment
+            advice. Company names and logos are trademarks of their respective owners, used only to
+            identify the underlying company of a tokenized stock.
+          </p>
+          <SocialLinks />
+        </div>
       </div>
     </footer>
   );

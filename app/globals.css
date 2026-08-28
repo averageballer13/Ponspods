@@ -67,6 +67,14 @@
   50% { opacity: var(--cloud-max, 0.3); }
 }
 
+/* Cloud bands panning right to left across the dApp backdrop. The layer is
+   twice as wide as the viewport and the texture repeats, so shifting by half
+   its width loops seamlessly. */
+@keyframes cloud-pan {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
 @layer base {
   html { scroll-behavior: smooth; }
   body {

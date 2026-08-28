@@ -46,3 +46,5 @@ next-env.d.ts
 /logo actual.png
 /logo + typo.png
 /Banner2.png
+/.fonts
+/.wp-*.png

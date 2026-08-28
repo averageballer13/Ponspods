@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { Logo } from "@/components/ui";
+import { SocialLinks } from "@/components/site/SocialLinks";
 
 const NAV = [
   { label: "Pods", href: "/app", icon: "grid" },
@@ -45,18 +46,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-svh flex-col">
-      {/* Pre-launch notice */}
-      <div className="border-line/70 bg-[#0a1607]/90 border-b backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1400px] items-center justify-center gap-2.5 px-5 py-2.5 text-center sm:px-8">
-          <span className="bg-lime animate-breathe h-1.5 w-1.5 shrink-0 rounded-full" />
-          <p className="text-mint/80 text-xs font-semibold sm:text-sm">
-            Pre-launch preview — no pod is deployed yet, so every protocol metric reads as pending.
-            The calculators work.
-          </p>
-        </div>
-      </div>
-
-      <header className="border-line/70 sticky top-0 z-50 border-b bg-[#040703]/85 backdrop-blur-xl">
+      <header className="border-line/70 sticky top-0 z-50 border-b bg-[#040703]/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-5 sm:px-8">
           <div className="flex items-center gap-7">
             <Link href="/" aria-label="Back to the site">
@@ -136,16 +126,14 @@ export function AppShell({ children }: { children: ReactNode }) {
       <footer className="border-line/70 border-t px-5 py-6 sm:px-8">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-3 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
           <p>Ponspods — pre-launch preview. Not live, not investment advice.</p>
-          <div className="flex gap-5">
+          <div className="flex items-center gap-5">
             <Link href="/" className="hover:text-mint transition-colors">
               Site
             </Link>
             <Link href="/#how" className="hover:text-mint transition-colors">
               How it works
             </Link>
-            <Link href="/#why" className="hover:text-mint transition-colors">
-              Why stocks
-            </Link>
+            <SocialLinks className="ml-1" />
           </div>
         </div>
       </footer>
