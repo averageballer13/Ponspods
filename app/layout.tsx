@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,43 +8,23 @@ const inter = Inter({
   display: "swap",
 });
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  variable: "--font-mono-num",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://ponspods.xyz"),
-  title: {
-    default: "Ponspods · Farm the volatility of real-world assets",
-    template: "%s · Ponspods",
-  },
+  title: "Ponspods · Get paid for the volatility Wall Street makes",
   description:
-    "Wrap tokenized stocks into Pods, farm the volatility that traditional markets create for free, and lever it up. Real yield from real assets, no emissions. Built on Robinhood Chain.",
+    "Wrap tokenized stocks into Pods and earn from every trade that keeps their price in line. Real yield, no emissions. Built on Robinhood Chain.",
   openGraph: {
-    title: "Ponspods · Farm the volatility of real-world assets",
+    title: "Ponspods · Get paid for the volatility Wall Street makes",
     description:
-      "Pods for tokenized stocks. Volatility farming, leveraged volatility farming and self-lending markets on Robinhood Chain.",
+      "Volatility farming for tokenized stocks. Wrap, farm, grow. Built on Robinhood Chain.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${bricolage.variable} ${mono.variable} h-full antialiased`}
-    >
-      <body className="bg-background text-foreground flex min-h-full flex-col">
-        {children}
-      </body>
+    <html lang="en" className={`${inter.variable} h-full`}>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

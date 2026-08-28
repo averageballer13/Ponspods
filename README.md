@@ -1,56 +1,58 @@
 # Ponspods
 
-**Peapods Finance × RWAs.** Des Pods pour actions tokenisées : on wrap un stock token, on farme la volatilité que Wall Street produit gratuitement, et on la lève avec du levier. Rendement réel, zéro émission.
+**Peapods Finance × RWAs.** Volatility farming, mais sur des actions tokenisées. On wrap un stock token dans un Pod, et chaque trade qui remet son prix en ligne paie un fee. Rendement réel, zéro émission. Sur Robinhood Chain.
 
-Interface concept construite sur Robinhood Chain, avec les mécaniques de [Peapods Finance](https://peapods.finance) et le langage visuel de [Pons](https://ponsnft.xyz).
-
-> 📄 **L'idée complète : [docs/CONCEPT.md](docs/CONCEPT.md)** — pourquoi les RWAs sont un bien meilleur carburant que la crypto pour le volatility farming, et ce que ça change concrètement dans le protocole.
+> 📄 **L'idée complète : [docs/CONCEPT.md](docs/CONCEPT.md)** — pourquoi les RWAs sont un bien meilleur carburant que la crypto pour le volatility farming.
 
 ---
 
 ## L'idée en 30 secondes
 
-Peapods transforme la volatilité en rendement : un Pod wrappe un actif en `pTKN`, chaque wrap / unwrap / trade paie un fee, une partie burn du `pTKN`, donc le **CBR** monte pour toujours.
+**Le Pod, en 3 étapes :**
 
-Le problème : la volatilité crypto est imprévisible et arrive en même temps que les liquidations.
+1. **Wrap** — tu mets ton action tokenisée dans un Pod, tu récupères une version emballée. Tu détiens toujours l'action.
+2. **Farm** — tous ceux qui entrent, sortent ou tradent ce token emballé paient un fee au Pod. Ces fees te reviennent.
+3. **Grow** — une partie de chaque fee détruit des tokens emballés alors que les actions derrière restent. Moins de tokens, même tas. Ta part grossit, et ça ne redescend jamais.
 
-Les actions tokenisées corrigent ça sur six points :
+**Pourquoi les actions et pas les memecoins :**
 
-1. **La volatilité est calendaire** — earnings, CPI, FOMC, opex, rebalancements. ~252 événements/an programmés.
-2. **Le NAV force l'arbitrage à se refermer** — chaque mouvement du sous-jacent oblige à repasser par le pod.
-3. **Le gap de session** — le marché ferme, le token non. 65 heures de dérive libre chaque week-end, corrigées à l'ouverture. Ponspods facture un **gap premium** pendant ces fenêtres.
-4. **Le sous-jacent rend déjà** — coupons et équivalents dividendes s'accumulent dans la réserve du pod.
-5. **USDG comme paired asset universel** — un seul marché de prêt profond au lieu de dizaines de marchés fragmentés.
-6. **Les pods d'indice sont des ETF à frais négatifs** — les fees burnent la supply au lieu de prélever une commission.
+- 📅 **Le calendrier est public** — earnings, décisions de taux, jours d'expiration. Tu sais quand ça va bouger avant que ça bouge.
+- 🌙 **Le week-end** — vendredi la bourse ferme, le token continue de se trader et dérive. Lundi tout doit être remis en ligne, et la correction passe par ton Pod. Toutes les semaines.
+- 🔒 **L'arbitrage est forcé** — une vraie action a un vrai prix sur une vraie bourse. Si le Pod dérive, il y a de l'argent gratuit sur la table et quelqu'un le prend toujours. Pour le prendre, il paie ton fee. Avec un memecoin, personne n'est obligé de venir.
 
 ---
 
 ## Le site
 
-| Route | Contenu |
+Landing unique, pré-lancement. **Aucun chiffre** — rien n'est live, donc rien n'est affiché.
+
+| Section | Contenu |
 |---|---|
-| `/` | Landing : hero, thèse RWA, how it works en scroll pinné, mécanique du gap, pods, volatility calendar, flywheel, FAQ |
-| `/app` | Explorateur de pods — recherche, filtres chaîne / catégorie, tri, vues grille et table |
-| `/app/pod/[slug]` | Fiche pod : CBR chart, fee schedule, composition, marché de prêt isolé, panneau Wrap / Unwrap / Leverage |
-| `/app/lending` | Métavaults et marchés isolés, panneau de supply |
-| `/app/swap` | Zap : de n'importe quel actif vers wrapped / LP / position levée |
-| `/app/portfolio` | Positions, santé, PnL, rewards |
-| `/app/create` | Déploiement d'un pod avec preview live des paramètres |
+| Hero | La proposition, plus les vrais logos des sociétés du lancement |
+| How it works | Wrap → Farm → Grow, trois grandes cartes |
+| Why stocks | Le gap du week-end en grand, plus le calendrier et l'arbitrage forcé |
+| Pods | La line-up : pNVDA, pTSLA, pMSTR, pHOOD, pSPACEX, pMAG7 |
+| CTA | Waitlist |
 
-## Design system
+### Design system
 
-Repris du langage visuel de Pons :
+Repris directement de l'interface [Peapods Finance](https://peapods.finance) :
 
-- **Fonts** — Bricolage Grotesque (display) + Inter (UI) + JetBrains Mono (chiffres tabulaires)
-- **Palette** — alice blue `#f0f8ff`, texte `#0f2036`, bordures `#bdd5ee`, accent `#3b76e0`, plus un vert « pod » `#12b981` pour le rendement
-- **Motion** — `word-reveal` (blur + lift sur les titres), `card-float`, `pulse-glow`, `glow-breathe`, `shine`, marquees, entrées au scroll via IntersectionObserver
-- **Interactions** — tout en `rounded-full`, hover `scale-[1.03]`, bouton primaire à halo dégradé qui inverse ses couleurs, CTA à cercle qui pivote de 45°
+- **Font** — Inter uniquement, headings en `font-extrabold`
+- **Fond** — `linear-gradient(to right, #1a1a1a, #000)`
+- **Cartes** — coque `#214214` en 16px de radius avec 2px de padding, intérieur en `linear-gradient(118.91deg, #132410, #214214)` à 12px
+- **Bouton** — `linear-gradient(162.53deg, #7fe339, #c5ef40)`, texte noir, radius 40px, weight 800
+- **Accents** — lime `#7fe339`, mint `#cef2cb`, lignes `#4a7a3b`
 
 Tous les tokens sont dans [`app/globals.css`](app/globals.css) (Tailwind v4, bloc `@theme`).
 
+### Logos
+
+Vrais marques, en SVG inline (viewBox 24×24, un seul path), générés dans [`lib/brands.ts`](lib/brands.ts) depuis [Simple Icons](https://simpleicons.org) (CC0). Les marques appartiennent à leurs propriétaires respectifs et servent uniquement à identifier la société derrière une action tokenisée.
+
 ## Stack
 
-Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4. Aucune dépendance externe : animations en CSS pur, charts en SVG écrit à la main.
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4. Zéro dépendance externe : animations en CSS pur, diagrammes en SVG écrit à la main.
 
 ## Démarrer
 
@@ -69,21 +71,19 @@ npm run build
 
 ```
 app/
-  page.tsx              landing
-  globals.css           design system (tokens + keyframes)
-  app/                  interface protocole
+  page.tsx              la landing
+  globals.css           design system (palette Peapods + keyframes)
 components/
-  ui.tsx                boutons, badges, cards, sparklines, meters
-  site/                 header, footer, marquee, reveal
-  landing/              sections de la landing
-  app/                  composants du protocole
+  ui.tsx                boutons, cartes, logos de marque, atomes de layout
+  site/                 header, footer
+  sections/             hero, how, why, pods, marquee, cta
 lib/
-  data.ts               état protocole mocké (pods, marchés, calendrier)
-  format.ts             formatage + générateurs de séries déterministes
+  brands.ts             paths SVG des vraies marques
+  pods.ts               la line-up de lancement
 docs/
   CONCEPT.md            la thèse RWA × Peapods en détail
 ```
 
 ## Avertissement
 
-Projet concept. Ce n'est pas un protocole déployé, les chiffres sont illustratifs, et rien ici n'est un conseil en investissement. Les mécaniques sont adaptées de la documentation publique de Peapods Finance.
+Projet concept. Ce n'est pas un protocole déployé et rien ici n'est un conseil en investissement. Les mécaniques sont adaptées de la documentation publique de Peapods Finance.

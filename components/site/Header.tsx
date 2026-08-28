@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ButtonPrimary, Logo } from "@/components/ui";
+import { Logo } from "@/components/ui";
 
 const NAV = [
-  { label: "Why RWAs", href: "/#thesis" },
-  { label: "How it works", href: "/#how" },
-  { label: "Pods", href: "/#pods" },
-  { label: "Calendar", href: "/#calendar" },
+  { label: "How it works", href: "#how" },
+  { label: "Why stocks", href: "#why" },
+  { label: "Pods", href: "#pods" },
 ];
 
 export function Header() {
@@ -16,70 +15,48 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-5 z-50 md:top-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link
-          href="/"
-          className={`flex items-center rounded-full py-1.5 transition-all duration-300 ${
-            scrolled ? "bg-white/85 px-3 backdrop-blur-md" : "px-0"
-          }`}
-        >
-          <Logo tone={scrolled ? "dark" : "light"} />
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "border-line-soft/70 border-b bg-black/80 backdrop-blur-xl" : ""
+      }`}
+    >
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
+        <Link href="/" aria-label="Ponspods home">
+          <Logo />
         </Link>
 
-        <nav
-          className={`hidden items-center gap-1 rounded-full p-1 transition-colors duration-300 md:flex ${
-            scrolled ? "border-border border bg-white/85 backdrop-blur-md" : "bg-black/25 backdrop-blur-sm"
-          }`}
-        >
+        <nav className="hidden items-center gap-10 md:flex">
           {NAV.map((n) => (
-            <Link
+            <a
               key={n.href}
               href={n.href}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-foreground-muted hover:text-foreground hover:bg-background-elevated-2"
-                  : "text-white/80 hover:text-white"
-              }`}
+              className="hover:text-lime text-base font-semibold text-white/70 transition-colors"
             >
               {n.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href="#pods"
-            className={`hidden rounded-full px-4 py-1.5 text-sm font-medium transition-colors lg:inline-flex ${
-              scrolled
-                ? "border-border text-foreground-muted hover:text-foreground border bg-white/85 backdrop-blur-md"
-                : "bg-black/25 text-white/80 backdrop-blur-sm hover:bg-black/45 hover:text-white"
-            }`}
-          >
-            $PODS
-          </a>
-          <ButtonPrimary href="/app" className="hidden sm:inline-flex">
-            Launch App
-          </ButtonPrimary>
+        <div className="flex items-center gap-3">
+          <span className="btn-lime hidden px-6 py-3 text-sm sm:inline-flex">Coming soon</span>
           <button
-            aria-label="Open menu"
+            aria-label="Menu"
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors md:hidden ${
-              scrolled ? "border-border text-foreground border bg-white/85" : "bg-black/25 text-white"
-            }`}
+            className="border-line-soft flex h-11 w-11 items-center justify-center rounded-full border text-white md:hidden"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path
-                d={open ? "M3 3l10 10M13 3L3 13" : "M2 4h12M2 8h12M2 12h12"}
+                d={open ? "M4 4l10 10M14 4L4 14" : "M2 5h14M2 9h14M2 13h14"}
                 stroke="currentColor"
-                strokeWidth="1.8"
+                strokeWidth="2"
                 strokeLinecap="round"
               />
             </svg>
@@ -88,25 +65,18 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-border card-shadow mx-4 mt-3 rounded-2xl border bg-white/95 p-2 backdrop-blur-xl md:hidden">
+        <nav className="border-line-soft mx-5 mb-3 rounded-2xl border bg-black/95 p-3 backdrop-blur-xl md:hidden">
           {NAV.map((n) => (
-            <Link
+            <a
               key={n.href}
               href={n.href}
               onClick={() => setOpen(false)}
-              className="text-foreground-muted hover:bg-background-elevated-2 block rounded-xl px-4 py-2.5 text-sm font-medium"
+              className="hover:bg-card block rounded-xl px-4 py-3.5 text-base font-semibold text-white/80"
             >
               {n.label}
-            </Link>
+            </a>
           ))}
-          <Link
-            href="/app"
-            onClick={() => setOpen(false)}
-            className="bg-foreground text-background mt-1 block rounded-xl px-4 py-2.5 text-center text-sm font-semibold"
-          >
-            Launch App
-          </Link>
-        </div>
+        </nav>
       ) : null}
     </header>
   );

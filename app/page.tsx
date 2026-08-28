@@ -1,15 +1,11 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Marquee } from "@/components/site/Marquee";
-import { Hero } from "@/components/landing/Hero";
-import { Thesis } from "@/components/landing/Thesis";
-import { HowItWorks } from "@/components/landing/HowItWorks";
-import { GapEngine } from "@/components/landing/GapEngine";
-import { PodsShowcase } from "@/components/landing/PodsShowcase";
-import { VolatilityCalendar } from "@/components/landing/Calendar";
-import { Flywheel } from "@/components/landing/Flywheel";
-import { Faq } from "@/components/landing/Faq";
-import { Cta } from "@/components/landing/Cta";
+import { Hero } from "@/components/sections/Hero";
+import { How } from "@/components/sections/How";
+import { Why } from "@/components/sections/Why";
+import { Pods } from "@/components/sections/Pods";
+import { Marquee } from "@/components/sections/Marquee";
+import { Cta } from "@/components/sections/Cta";
 
 export default function Home() {
   return (
@@ -17,14 +13,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Thesis />
-        <HowItWorks />
-        <GapEngine />
-        <PodsShowcase />
-        <VolatilityCalendar />
-        <Flywheel />
+        <How />
+        <Why />
+        <Pods />
         <Marquee />
-        <Faq />
         <Cta />
       </main>
       <Footer />
