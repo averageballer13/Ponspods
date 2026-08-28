@@ -7,31 +7,31 @@ import { BRANDS } from "@/lib/brands";
 /* Logo                                                                */
 /* ------------------------------------------------------------------ */
 
+/** The pod on its own — 380x172 in the source art. */
 export function LogoMark({ size = 30 }: { size?: number }) {
   return (
     <Image
       src="/logo-mark.png"
       alt=""
-      width={size}
+      width={Math.round(size * (380 / 172))}
       height={size}
       priority
-      className="h-auto w-auto"
-      style={{ width: "auto", height: size }}
+      style={{ height: size, width: "auto" }}
     />
   );
 }
 
+/** Full lockup, pod plus wordmark — 1710x276 in the source art. */
 export function Logo({ size = 28 }: { size?: number }) {
   return (
-    <span className="flex items-center gap-3">
-      <LogoMark size={size} />
-      <span
-        className="leading-none font-extrabold tracking-[-0.03em] text-white"
-        style={{ fontSize: size * 0.72 }}
-      >
-        Ponspods
-      </span>
-    </span>
+    <Image
+      src="/logo-lockup.png"
+      alt="Ponspods"
+      width={Math.round(size * (1710 / 276))}
+      height={size}
+      priority
+      style={{ height: size, width: "auto" }}
+    />
   );
 }
 
