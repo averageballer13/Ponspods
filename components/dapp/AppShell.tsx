@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { Logo } from "@/components/ui";
 import { SocialLinks } from "@/components/site/SocialLinks";
+import { ConnectButton, WalletProvider } from "@/components/dapp/WalletProvider";
 
 const NAV = [
   { label: "Pods", href: "/app", icon: "grid" },
@@ -38,14 +39,14 @@ function NavIcon({ name }: { name: string }) {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const [connected, setConnected] = useState(false);
   const [menu, setMenu] = useState(false);
 
   const isActive = (href: string) =>
     href === "/app" ? pathname === "/app" : pathname.startsWith(href);
 
   return (
-    <div className="app-scope flex min-h-svh flex-col">
+    <WalletProvider>
+      <div className="app-scope flex min-h-svh flex-col">
       <header className="border-line/70 sticky top-0 z-50 border-b bg-[#040703]/55 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-5 sm:px-8">
           <div className="flex items-center gap-7">
@@ -75,16 +76,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="bg-lime/70 h-1.5 w-1.5 rounded-full" />
               Robinhood Chain
             </span>
-            <button
-              onClick={() => setConnected((v) => !v)}
-              className={
-                connected
-                  ? "border-line rounded-full border px-4 py-2 text-sm font-bold text-white"
-                  : "btn-light px-4 py-2 text-sm"
-              }
-            >
-              {connected ? "0x7a4f…c19b" : "Connect"}
-            </button>
+            <ConnectButton />
             <button
               aria-label="Menu"
               onClick={() => setMenu((v) => !v)}
@@ -137,6 +129,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </WalletProvider>
   );
 }

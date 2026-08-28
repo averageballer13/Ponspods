@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PODS } from "@/lib/pods";
 import { Pending } from "@/components/ui";
 import { AmountField, Row } from "@/components/dapp/bits";
+import { ActionButton } from "@/components/dapp/WalletProvider";
 
 const INPUTS = ["USDG", "USDC", "ETH", "PODS"];
 type Destination = "wrap" | "lp" | "lvf";
@@ -123,12 +124,20 @@ export function SwapPanel() {
           ))}
         </div>
 
-        <button
-          disabled
-          className="mt-4 w-full cursor-not-allowed rounded-full bg-white/10 px-4 py-3 text-sm font-extrabold text-white/40"
+        <ActionButton
+          className="mt-4"
+          disabled={!amount}
+          tx={{
+            title: `Zap ${from} into ${pod.ticker}`,
+            rows: [
+              ["Pay", `${amount || "0"} ${from}`],
+              ["Destination", DEST.find((d) => d.id === dest)!.label],
+              ["Route", route.join(" -> ")],
+            ],
+          }}
         >
-          Routing opens at launch
-        </button>
+          Zap into {pod.ticker}
+        </ActionButton>
       </div>
     </div>
   );

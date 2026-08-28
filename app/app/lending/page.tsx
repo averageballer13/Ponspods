@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MARKETS } from "@/lib/pods";
 import { Pending } from "@/components/ui";
 import { PageHead, StatSlot } from "@/components/dapp/bits";
+import { SupplyButton } from "@/components/dapp/SupplyButton";
 
 export const metadata: Metadata = { title: "Lending · Ponspods" };
 
@@ -76,12 +77,7 @@ export default function LendingPage() {
                   ))}
                 </div>
 
-                <button
-                  disabled
-                  className="mt-6 w-full cursor-not-allowed rounded-full bg-white/10 px-4 py-3 text-sm font-extrabold text-white/40"
-                >
-                  Opens at launch
-                </button>
+                <SupplyButton market={m.name} asset={m.asset} />
               </div>
             </div>
           ))}

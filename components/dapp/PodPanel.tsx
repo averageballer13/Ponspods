@@ -5,6 +5,7 @@ import type { Pod } from "@/lib/pods";
 import { LAUNCH_CBR, MAX_LEVERAGE, MAX_LTV, formatAmount, leverageMath } from "@/lib/protocol";
 import { Pending } from "@/components/ui";
 import { AmountField, Meter, Row } from "@/components/dapp/bits";
+import { ActionButton } from "@/components/dapp/WalletProvider";
 
 type Tab = "leverage" | "wrap";
 
@@ -120,12 +121,26 @@ export function PodPanel({ pod }: { pod: Pod }) {
               </div>
             ) : null}
 
-            <button
-              disabled
-              className="mt-4 w-full cursor-not-allowed rounded-full bg-white/10 px-4 py-3 text-sm font-extrabold text-white/40"
+            <ActionButton
+              className="mt-4"
+              disabled={!amt}
+              tx={{
+                title: `Open ${leverage.toFixed(1)}x position on ${pod.ticker}`,
+                rows: [
+                  ["Deposit", `${amount || "0"} ${pod.ticker}`],
+                  ["Borrow", `${formatAmount(m.debt, 2)} ${pod.paired}`],
+                  ["LP size", `${formatAmount(m.position, 2)} ${pod.ticker}`],
+                  ["LTV", `${(m.ltv * 100).toFixed(1)}%`],
+                  ["Liquidation", `-${(m.liquidationDrop * 100).toFixed(0)}%`],
+                ],
+                note:
+                  pod.session === "market-hours"
+                    ? "This position cannot be managed while the underlying market is closed."
+                    : undefined,
+              }}
             >
-              Pod not deployed yet
-            </button>
+              Open {leverage.toFixed(1)}x position
+            </ActionButton>
             <p className="text-sage/40 mt-3 text-center text-[11px]">
               The numbers above are protocol maths, not market data.
             </p>
@@ -155,12 +170,20 @@ export function PodPanel({ pod }: { pod: Pod }) {
               pod tokens while the stocks behind them stay put — so wrapping later mints you fewer
               tokens, each worth more.
             </p>
-            <button
-              disabled
-              className="mt-4 w-full cursor-not-allowed rounded-full bg-white/10 px-4 py-3 text-sm font-extrabold text-white/40"
+            <ActionButton
+              className="mt-4"
+              disabled={!amt}
+              tx={{
+                title: `Wrap into ${pod.ticker}`,
+                rows: [
+                  ["Deposit", `${amount || "0"} ${pod.company} token`],
+                  ["Receive", `${formatAmount(amt / LAUNCH_CBR)} ${pod.ticker}`],
+                  ["Backing ratio", LAUNCH_CBR.toFixed(4)],
+                ],
+              }}
             >
-              Pod not deployed yet
-            </button>
+              Wrap into {pod.ticker}
+            </ActionButton>
           </div>
         )}
       </div>

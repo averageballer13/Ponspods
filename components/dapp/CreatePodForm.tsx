@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { MAX_LEVERAGE, MAX_LTV } from "@/lib/protocol";
 import { BrandMark } from "@/components/ui";
 import { Meter } from "@/components/dapp/bits";
+import { ActionButton } from "@/components/dapp/WalletProvider";
 
 const ASSETS = [
   { brand: "nvidia", symbol: "NVDA", name: "Nvidia", closes: true },
@@ -482,12 +483,23 @@ export function CreatePodForm() {
               </p>
             </div>
 
-            <button
-              disabled
-              className="mt-6 w-full cursor-not-allowed rounded-full bg-white/10 px-4 py-3 text-sm font-extrabold text-white/40"
+            <ActionButton
+              className="mt-6"
+              tx={{
+                title: `Deploy ${ticker}`,
+                rows: [
+                  ["Underlying", picked.length > 1 ? `${picked.length} assets` : picked[0]],
+                  ["Pair", `${ticker} / USDG`],
+                  ["Wrap / unwrap", `${wrapFee.toFixed(2)}% / ${unwrapFee.toFixed(2)}%`],
+                  ["AMM fee", `${ammFee.toFixed(2)}%`],
+                  ["Burn share", `${burnShare}%`],
+                  ["Self-lending", selfLend ? "On" : "Off"],
+                ],
+                note: "Pod parameters are immutable once deployed.",
+              }}
             >
-              Deployment opens at launch
-            </button>
+              Deploy pod
+            </ActionButton>
             <p className="mt-3 text-center text-[11px] text-white/35">
               Immutable once deployed. Fees can never be changed.
             </p>
