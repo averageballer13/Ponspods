@@ -131,7 +131,7 @@ export function CreatePodForm() {
                   onClick={() => switchMode(id)}
                   className={`rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${
                     mode === id
-                      ? "bg-white text-[#040703]"
+                      ? "app-nav-active"
                       : "border-line border text-white/45 hover:text-white"
                   }`}
                 >
@@ -203,7 +203,7 @@ export function CreatePodForm() {
                         onChange={(e) =>
                           setWeights((w) => ({ ...w, [c.symbol]: Number(e.target.value) }))
                         }
-                        className="flex-1 accent-white"
+                        className="accent-lime flex-1"
                       />
                       <span className="tnum w-12 shrink-0 text-right text-xs font-extrabold">
                         {c.pct.toFixed(1)}%
@@ -230,7 +230,7 @@ export function CreatePodForm() {
                         onClick={() => setRebalance(r)}
                         className={`rounded-full px-3.5 py-2 text-xs font-bold transition-colors ${
                           rebalance === r
-                            ? "bg-white text-[#040703]"
+                            ? "app-nav-active"
                             : "border-line border text-white/45 hover:text-white"
                         }`}
                       >
@@ -253,7 +253,7 @@ export function CreatePodForm() {
                   key={p}
                   className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors ${
                     p === "USDG"
-                      ? "bg-white text-[#040703]"
+                      ? "app-nav-active"
                       : "border-line border text-white/45 hover:text-white"
                   }`}
                 >
@@ -272,7 +272,7 @@ export function CreatePodForm() {
                 step={0.05}
                 value={wrapFee}
                 onChange={(e) => setWrapFee(Number(e.target.value))}
-                className="w-full accent-white"
+                className="accent-lime w-full"
               />
             </Field>
             <Field label={`Unwrap fee — ${unwrapFee.toFixed(2)}%`}>
@@ -283,7 +283,7 @@ export function CreatePodForm() {
                 step={0.05}
                 value={unwrapFee}
                 onChange={(e) => setUnwrapFee(Number(e.target.value))}
-                className="w-full accent-white"
+                className="accent-lime w-full"
               />
             </Field>
             <Field label={`AMM fee — ${ammFee.toFixed(2)}%`}>
@@ -294,7 +294,7 @@ export function CreatePodForm() {
                 step={0.05}
                 value={ammFee}
                 onChange={(e) => setAmmFee(Number(e.target.value))}
-                className="w-full accent-white"
+                className="accent-lime w-full"
               />
             </Field>
             <Field label={`Burn share — ${burnShare}%`}>
@@ -305,7 +305,7 @@ export function CreatePodForm() {
                 step={5}
                 value={burnShare}
                 onChange={(e) => setBurnShare(Number(e.target.value))}
-                className="w-full accent-white"
+                className="accent-lime w-full"
               />
             </Field>
           </div>
@@ -341,7 +341,7 @@ export function CreatePodForm() {
               value={gapPremium}
               disabled={!closes}
               onChange={(e) => setGapPremium(Number(e.target.value))}
-              className="mt-4 w-full accent-white disabled:opacity-30"
+              className="accent-lime mt-4 w-full disabled:opacity-30"
             />
           </div>
 

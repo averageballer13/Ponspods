@@ -14,7 +14,7 @@ export function PageHead({
     <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
       <div className="max-w-2xl">
         <h1 className="text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">{title}</h1>
-        <p className="mt-3 text-base leading-relaxed text-white/55">{intro}</p>
+        <p className="mt-3 text-base leading-relaxed text-white/45">{intro}</p>
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>
@@ -46,10 +46,10 @@ export function Row({
   tone?: "plain" | "good" | "warn";
 }) {
   const cls =
-    tone === "good" ? "text-lime" : tone === "warn" ? "text-[#e0a23b]" : "text-white";
+    tone === "good" ? "text-lime" : tone === "warn" ? "text-[#e0a23b]" : "text-white/85";
   return (
     <div className="flex items-center justify-between py-2 text-sm">
-      <span className="text-white/50">{label}</span>
+      <span className="text-white/40">{label}</span>
       <span className={`tnum font-bold ${cls}`}>{value}</span>
     </div>
   );
@@ -85,7 +85,7 @@ export function EmptyState({
   return (
     <div className="border-line dot-field rounded-2xl border border-dashed px-8 py-20 text-center">
       <p className="text-xl font-extrabold">{title}</p>
-      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/50">{body}</p>
+      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/40">{body}</p>
       {action ? <div className="mt-7 flex justify-center">{action}</div> : null}
     </div>
   );

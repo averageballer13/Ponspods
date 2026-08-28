@@ -57,7 +57,7 @@ export function PodsExplorer() {
                     key={f.id}
                     onClick={() => setCat(f.id)}
                     className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
-                      cat === f.id ? "bg-white text-[#040703]" : "text-white/50 hover:text-white"
+                      cat === f.id ? "app-nav-active" : "hover:text-lime text-white/40"
                     }`}
                   >
                     {f.label}
@@ -70,7 +70,7 @@ export function PodsExplorer() {
                   onClick={() => setView("grid")}
                   aria-label="Grid view"
                   className={`rounded-full px-2.5 py-1.5 transition-colors ${
-                    view === "grid" ? "bg-white text-[#040703]" : "text-white/40"
+                    view === "grid" ? "app-nav-active" : "hover:text-lime text-white/35"
                   }`}
                 >
                   <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
@@ -84,7 +84,7 @@ export function PodsExplorer() {
                   onClick={() => setView("table")}
                   aria-label="Table view"
                   className={`rounded-full px-2.5 py-1.5 transition-colors ${
-                    view === "table" ? "bg-white text-[#040703]" : "text-white/40"
+                    view === "table" ? "app-nav-active" : "hover:text-lime text-white/35"
                   }`}
                 >
                   <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
@@ -120,8 +120,8 @@ export function PodsExplorer() {
                 </div>
 
                 <h3 className="mt-6 text-2xl font-extrabold tracking-[-0.02em]">{pod.ticker}</h3>
-                <p className="mt-1 text-sm font-semibold text-white/40">{pod.company}</p>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-white/55">{pod.line}</p>
+                <p className="mt-1 text-sm font-semibold text-white/35">{pod.company}</p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-white/45">{pod.line}</p>
 
                 <div className="border-line/70 mt-6 grid grid-cols-3 gap-3 border-t pt-4">
                   {["LVF APY", "Pod TVL", "CBR"].map((l) => (

@@ -77,7 +77,7 @@ export function SwapPanel() {
               key={d.id}
               onClick={() => setDest(d.id)}
               className={`rounded-full px-2 py-2.5 text-[11px] font-bold transition-colors ${
-                dest === d.id ? "bg-white text-[#040703]" : "text-white/50 hover:text-white"
+                dest === d.id ? "app-nav-active" : "text-white/50 hover:text-white"
               }`}
             >
               {d.label}
@@ -114,7 +114,7 @@ export function SwapPanel() {
               onClick={() => setFrom(i)}
               className={`flex-1 rounded-full px-2 py-2 text-xs font-bold transition-colors ${
                 from === i
-                  ? "bg-white text-[#040703]"
+                  ? "app-nav-active"
                   : "border-line border text-white/50 hover:text-white"
               }`}
             >

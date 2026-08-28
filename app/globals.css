@@ -190,4 +190,56 @@
   .tnum {
     font-variant-numeric: tabular-nums;
   }
+
+  /* ---------------------------------------------------------------
+     dApp scope: surfaces drop to near-black and the contrast comes
+     down. Green stops being the surface colour and becomes the thing
+     that appears on hover and on headings.
+  --------------------------------------------------------------- */
+  .app-scope .card-shell {
+    background: #1a1c19;
+  }
+  .app-scope .card-shell:hover {
+    background: #2c5c22;
+    box-shadow: 0 26px 54px -34px rgba(127, 227, 57, 0.28);
+  }
+  .app-scope .card-inner {
+    background: linear-gradient(140deg, rgba(9, 11, 8, 0.92) 0%, rgba(15, 18, 14, 0.92) 100%);
+  }
+  .app-scope .card-flat {
+    background: rgba(9, 11, 8, 0.9);
+  }
+  .app-scope .chip {
+    background: rgba(127, 227, 57, 0.07);
+    border-color: rgba(127, 227, 57, 0.16);
+    color: #b9cfae;
+  }
+
+  /* headings pick up the green, body text steps back */
+  .app-scope h1 {
+    color: #ebefe9;
+  }
+  .app-scope h2,
+  .app-scope h3 {
+    color: #b9cfae;
+  }
+
+  .app-scope .btn-light {
+    background: #cfe3c2;
+    color: #0a0f08;
+  }
+  .app-scope .btn-light:hover {
+    background: #7fe339;
+    box-shadow: 0 14px 34px -16px rgba(127, 227, 57, 0.5);
+  }
+
+  /* the active pill in the nav, softened from white to deep green */
+  .app-nav-active {
+    background: rgba(127, 227, 57, 0.14);
+    color: #cfe3c2;
+  }
+
+  .app-scope input[type="range"] {
+    accent-color: #7fe339;
+  }
 }

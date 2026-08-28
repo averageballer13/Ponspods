@@ -34,7 +34,7 @@ export function PodPanel({ pod }: { pod: Pod }) {
                 setAmount("");
               }}
               className={`flex-1 rounded-full px-4 py-2.5 text-sm font-bold transition-colors ${
-                tab === id ? "bg-white text-[#040703]" : "text-white/50 hover:text-white"
+                tab === id ? "app-nav-active" : "text-white/50 hover:text-white"
               }`}
             >
               {label}
@@ -63,7 +63,7 @@ export function PodPanel({ pod }: { pod: Pod }) {
                 step={0.1}
                 value={leverage}
                 onChange={(e) => setLeverage(Number(e.target.value))}
-                className="mt-3 w-full accent-white"
+                className="accent-lime mt-3 w-full"
               />
               <div className="text-sage/40 mt-1 flex justify-between text-[10px] font-semibold">
                 <span>1×</span>

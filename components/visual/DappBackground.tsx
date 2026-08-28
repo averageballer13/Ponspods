@@ -41,12 +41,13 @@ export function DappBackground() {
         </div>
       ))}
 
-      {/* darkening pass so the interface always has contrast */}
+      {/* darkening pass so the interface always has contrast, kept light enough
+          that the landscape still reads through it */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(4,7,3,0.82) 0%, rgba(4,7,3,0.88) 42%, rgba(4,7,3,0.95) 100%)",
+            "linear-gradient(180deg, rgba(4,7,3,0.62) 0%, rgba(4,7,3,0.72) 42%, rgba(4,7,3,0.86) 100%)",
         }}
       />
 
