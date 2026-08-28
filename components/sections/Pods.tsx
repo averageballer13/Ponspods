@@ -25,7 +25,7 @@ export function Pods() {
                 ) : (
                   <BrandChip brand={pod.brands[0]} size={60} />
                 )}
-                <span className="chip-lime px-3 py-1.5 text-[11px] font-extrabold tracking-[0.12em] uppercase">
+                <span className="chip px-3 py-1.5 text-[11px] font-extrabold tracking-[0.12em] uppercase">
                   {pod.tag}
                 </span>
               </div>

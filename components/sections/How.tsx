@@ -3,7 +3,7 @@ import { BrandMark, Eyebrow, Section } from "@/components/ui";
 function WrapArt() {
   return (
     <div className="flex items-center justify-center gap-4">
-      <span className="bg-deep border-line-soft flex h-16 w-16 items-center justify-center rounded-2xl border">
+      <span className="bg-[#070f05] border-line flex h-16 w-16 items-center justify-center rounded-2xl border">
         <BrandMark brand="nvidia" size={30} />
       </span>
       <svg width="26" height="18" viewBox="0 0 26 18" fill="none" aria-hidden="true">
@@ -113,7 +113,7 @@ export function How() {
         {STEPS.map((s) => (
           <div key={s.n} className="card-shell">
             <div className="card-inner flex h-full flex-col p-8 sm:p-9">
-              <div className="border-line-soft/70 flex h-36 items-center justify-center rounded-xl border border-dashed">
+              <div className="border-line/70 flex h-36 items-center justify-center rounded-xl border border-dashed">
                 {s.art}
               </div>
               <p className="text-lime mt-8 text-sm font-extrabold tracking-[0.18em]">{s.n}</p>

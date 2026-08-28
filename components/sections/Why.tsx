@@ -24,13 +24,13 @@ function GapChart() {
       <rect x="120" y="30" width="400" height="150" fill="#ffffff" opacity="0.035" rx="4" />
       <rect x="520" y="30" width="180" height="150" fill="#7fe339" opacity="0.07" rx="4" />
 
-      <text x="60" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#cef2cb">
+      <text x="60" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#dcecd4">
         OPEN
       </text>
-      <text x="320" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#bababa">
+      <text x="320" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#9db894">
         CLOSED
       </text>
-      <text x="610" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#cef2cb">
+      <text x="610" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#dcecd4">
         OPEN
       </text>
 
@@ -38,8 +38,8 @@ function GapChart() {
       <path d={AREA} fill="url(#gapArea)" />
 
       {/* frozen official price */}
-      <line x1="0" y1="150" x2="700" y2="150" stroke="#bababa" strokeWidth="2" strokeDasharray="7 7" />
-      <text x="6" y="172" fontSize="14" fill="#bababa">
+      <line x1="0" y1="150" x2="700" y2="150" stroke="#9db894" strokeWidth="2" strokeDasharray="7 7" />
+      <text x="6" y="172" fontSize="14" fill="#9db894">
         official price, frozen
       </text>
 
@@ -54,7 +54,7 @@ function GapChart() {
       <text x="552" y="118" fontSize="15" fontWeight="700" fill="#ffffff">
         it all snaps back
       </text>
-      <text x="552" y="138" fontSize="14" fill="#cef2cb">
+      <text x="552" y="138" fontSize="14" fill="#dcecd4">
         through your Pod
       </text>
 
@@ -84,7 +84,7 @@ function CalendarArt() {
         <span
           key={i}
           className={`flex h-14 w-14 items-center justify-center rounded-xl text-lg font-extrabold ${
-            x.on ? "bg-lime text-black" : "bg-deep border-line-soft border text-white/35"
+            x.on ? "bg-lime text-black" : "bg-[#070f05] border-line border text-white/35"
           }`}
         >
           {x.d}
@@ -97,7 +97,7 @@ function CalendarArt() {
 function ArbArt() {
   return (
     <div className="flex items-center gap-5">
-      <span className="bg-deep border-line-soft flex flex-col items-center rounded-xl border px-5 py-3">
+      <span className="bg-[#070f05] border-line flex flex-col items-center rounded-xl border px-5 py-3">
         <span className="text-xs font-bold text-white/40">POD</span>
         <span className="mt-1 h-1.5 w-14 rounded-full bg-white/25" />
       </span>
@@ -150,7 +150,7 @@ export function Why() {
                 through your Pod, paying a fee on the way. Every single week.
               </p>
             </div>
-            <div className="card-flat border-line-soft/60 border p-5 sm:p-7">
+            <div className="card-flat border-line/60 border p-5 sm:p-7">
               <GapChart />
             </div>
           </div>
@@ -161,7 +161,7 @@ export function Why() {
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <div className="card-shell">
           <div className="card-inner p-8 sm:p-10">
-            <div className="border-line-soft/70 flex h-32 items-center justify-center rounded-xl border border-dashed">
+            <div className="border-line/70 flex h-32 items-center justify-center rounded-xl border border-dashed">
               <CalendarArt />
             </div>
             <h3 className="mt-8 text-3xl font-extrabold tracking-[-0.02em]">
@@ -176,7 +176,7 @@ export function Why() {
 
         <div className="card-shell">
           <div className="card-inner p-8 sm:p-10">
-            <div className="border-line-soft/70 flex h-32 items-center justify-center rounded-xl border border-dashed">
+            <div className="border-line/70 flex h-32 items-center justify-center rounded-xl border border-dashed">
               <ArbArt />
             </div>
             <h3 className="mt-8 text-3xl font-extrabold tracking-[-0.02em]">

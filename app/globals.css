@@ -2,75 +2,84 @@
 
 /* ------------------------------------------------------------------
    PONSPODS — design system
-   Palette, radii and button treatments taken from the Peapods Finance
-   interface: near-black page, dark green cards, lime accent, Inter only.
+   Black and deep forest green, light used as the contrast.
+   Signature texture: a dot-matrix screen, echoing the pixel-block logo.
 ------------------------------------------------------------------ */
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Surfaces */
-  --color-ink: #000000;
-  --color-ink-2: #1a1a1a;
-  --color-deep: #0a1407;
-  --color-card: #132410;
-  --color-card-2: #214214;
+  /* Surfaces — darkest to lightest */
+  --color-ink: #040703;
+  --color-void: #040703;
+  --color-forest-900: #070f05;
+  --color-forest-850: #0a1607;
+  --color-forest-800: #0d1e0a;
+  --color-forest-700: #12290d;
+  --color-forest-600: #193813;
+  --color-forest-500: #234a19;
 
   /* Lines */
-  --color-line: #4a7a3b;
-  --color-line-soft: #214214;
+  --color-line: #1c3a15;
+  --color-line-2: #2c5c22;
+  --color-moss: #4a7a3b;
 
-  /* Accent */
+  /* Light — the contrast */
+  --color-chalk: #ffffff;
+  --color-mint: #dcecd4;
+  --color-sage: #9db894;
+
+  /* Signal */
   --color-lime: #7fe339;
   --color-lime-2: #c5ef40;
-  --color-lime-3: #d3f141;
-  --color-leaf: #47a63a;
-  --color-mint: #cef2cb;
 
-  /* Neutrals */
-  --color-grey: #bababa;
-  --color-grey-2: #707070;
-  --color-grey-3: #2b2b2b;
-  --color-blue: #2246ad;
-
-  /* Radii — Peapods uses 16px cards, 12px inner, 40px pills */
   --radius-card: 16px;
   --radius-inner: 12px;
   --radius-pill: 40px;
+  --radius-block: 10px;
 
-  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee: marquee 46s linear infinite;
   --animate-breathe: breathe 5s ease-in-out infinite;
+  --animate-drift: drift 22s ease-in-out infinite;
 }
 
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 @keyframes breathe {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.04); }
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Clouds crossing the sky on a slow wind. Each layer starts off-screen left
+   and travels a full width, so the loop never shows a seam. */
+@keyframes cloud-wind {
+  0% { transform: translate3d(-40%, 0, 0); }
+  100% { transform: translate3d(140%, 0, 0); }
+}
+@keyframes cloud-swell {
+  0%, 100% { opacity: var(--cloud-min, 0.16); }
+  50% { opacity: var(--cloud-max, 0.3); }
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
   body {
-    background: linear-gradient(to right, #1a1a1a, #000000);
-    background-attachment: fixed;
+    background: #040703;
     color: #ffffff;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  ::selection {
-    background: var(--color-lime);
-    color: #000;
-  }
+  ::selection { background: #7fe339; color: #040703; }
   ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #0a0a0a; }
-  ::-webkit-scrollbar-thumb { background: var(--color-card-2); border-radius: 999px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-line); }
+  ::-webkit-scrollbar-track { background: #040703; }
+  ::-webkit-scrollbar-thumb { background: #193813; border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2c5c22; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -83,69 +92,94 @@
 }
 
 @layer utilities {
-  /* Peapods primary button: lime gradient, black label, full pill */
-  .btn-lime {
-    background: linear-gradient(162.53deg, #7fe339 2.81%, #c5ef40);
-    color: #000;
-    border-radius: var(--radius-pill);
-    font-weight: 800;
-    transition: filter 0.3s ease, transform 0.3s ease;
+  /* --- Signature texture: dot-matrix screen ---------------------- */
+  .dot-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(4, 7, 3, 0.72) 0.9px, transparent 1.1px);
+    background-size: 4px 4px;
   }
-  .btn-lime:hover {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
+  .dot-screen-lg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(4, 7, 3, 0.6) 1.3px, transparent 1.6px);
+    background-size: 7px 7px;
+  }
+  /* Light dots, for use on top of near-black surfaces */
+  .dot-field {
+    background-image: radial-gradient(circle, rgba(157, 184, 148, 0.16) 1px, transparent 1.2px);
+    background-size: 14px 14px;
+  }
+  .pixel-grid {
+    background-image:
+      linear-gradient(to right, rgba(157, 184, 148, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(157, 184, 148, 0.055) 1px, transparent 1px);
+    background-size: 44px 44px;
   }
 
-  .btn-ghost {
-    border: 1px solid var(--color-line);
-    color: #fff;
+  /* --- Buttons: light on dark ----------------------------------- */
+  .btn-light {
+    background: #ffffff;
+    color: #040703;
+    border-radius: var(--radius-pill);
+    font-weight: 800;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -14px rgba(255, 255, 255, 0.45);
+  }
+  .btn-outline {
+    border: 1px solid var(--color-line-2);
+    color: #ffffff;
     border-radius: var(--radius-pill);
     font-weight: 700;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
   }
-  .btn-ghost:hover {
-    background: rgba(127, 227, 57, 0.1);
+  .btn-outline:hover {
+    background: rgba(127, 227, 57, 0.09);
     border-color: var(--color-lime);
   }
 
-  /* Peapods card: 2px solid shell + gradient interior */
+  /* --- Cards: Peapods block structure, darker ------------------- */
   .card-shell {
-    background: var(--color-card-2);
+    background: #193813;
     border-radius: var(--radius-card);
-    padding: 2px;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+    padding: 1.5px;
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
   }
   .card-shell:hover {
-    background: var(--color-line);
-    box-shadow: 0 24px 50px -30px rgba(127, 227, 57, 0.45);
-    transform: translateY(-4px);
+    background: #2c5c22;
+    transform: translateY(-3px);
+    box-shadow: 0 26px 54px -34px rgba(127, 227, 57, 0.4);
   }
   .card-inner {
-    background: linear-gradient(118.91deg, #132410 34.01%, #214214 92.38%);
+    background: linear-gradient(140deg, #0a1607 0%, #12290d 100%);
     border-radius: var(--radius-inner);
     height: 100%;
   }
   .card-flat {
-    background: var(--color-card);
+    background: #0a1607;
     border-radius: var(--radius-inner);
-    height: 100%;
   }
 
-  .chip-lime {
-    background: rgba(127, 227, 57, 0.15);
+  .chip {
+    background: rgba(127, 227, 57, 0.1);
     color: var(--color-mint);
+    border: 1px solid rgba(127, 227, 57, 0.2);
     border-radius: 8px;
-  }
-
-  .text-lime-gradient {
-    background: linear-gradient(162.53deg, #7fe339 2.81%, #c5ef40);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
   }
 }

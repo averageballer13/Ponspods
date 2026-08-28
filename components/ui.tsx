@@ -1,6 +1,39 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { BRANDS } from "@/lib/brands";
+
+/* ------------------------------------------------------------------ */
+/* Logo                                                                */
+/* ------------------------------------------------------------------ */
+
+export function LogoMark({ size = 30 }: { size?: number }) {
+  return (
+    <Image
+      src="/logo-mark.png"
+      alt=""
+      width={size}
+      height={size}
+      priority
+      className="h-auto w-auto"
+      style={{ width: "auto", height: size }}
+    />
+  );
+}
+
+export function Logo({ size = 28 }: { size?: number }) {
+  return (
+    <span className="flex items-center gap-3">
+      <LogoMark size={size} />
+      <span
+        className="leading-none font-extrabold tracking-[-0.03em] text-white"
+        style={{ fontSize: size * 0.72 }}
+      >
+        Ponspods
+      </span>
+    </span>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /* Brand marks                                                         */
@@ -33,11 +66,10 @@ export function BrandMark({
   );
 }
 
-/** Brand mark on the dark round chip used across the site. */
-export function BrandChip({ brand, size = 64 }: { brand: string; size?: number }) {
+export function BrandChip({ brand, size = 56 }: { brand: string; size?: number }) {
   return (
     <span
-      className="bg-deep border-line-soft flex items-center justify-center rounded-full border"
+      className="border-line flex items-center justify-center rounded-xl border bg-[#070f05]"
       style={{ width: size, height: size }}
     >
       <BrandMark brand={brand} size={size * 0.5} />
@@ -45,60 +77,23 @@ export function BrandChip({ brand, size = 64 }: { brand: string; size?: number }
   );
 }
 
-/** Overlapping cluster of marks, used for basket pods. */
-export function BrandCluster({ brands, size = 44 }: { brands: string[]; size?: number }) {
+export function BrandCluster({ brands, size = 40 }: { brands: string[]; size?: number }) {
   return (
     <span className="flex items-center">
       {brands.map((b, i) => (
         <span
           key={b}
-          className="bg-deep border-line-soft flex items-center justify-center rounded-full border"
+          className="border-line flex items-center justify-center rounded-xl border bg-[#070f05]"
           style={{
             width: size,
             height: size,
-            marginLeft: i === 0 ? 0 : -size * 0.32,
+            marginLeft: i === 0 ? 0 : -size * 0.3,
             zIndex: brands.length - i,
           }}
         >
           <BrandMark brand={b} size={size * 0.5} />
         </span>
       ))}
-    </span>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Logo                                                                */
-/* ------------------------------------------------------------------ */
-
-export function Logo({ size = 34 }: { size?: number }) {
-  return (
-    <span className="flex items-center gap-3">
-      <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="pp-logo" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#7fe339" />
-            <stop offset="1" stopColor="#c5ef40" />
-          </linearGradient>
-        </defs>
-        <rect width="40" height="40" rx="12" fill="url(#pp-logo)" />
-        {/* pod shell */}
-        <path
-          d="M10 24c0-6.6 4.4-11.4 10-11.4S30 17.4 30 24"
-          stroke="#0a1407"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-        />
-        {/* deck */}
-        <path d="M7 28h26" stroke="#0a1407" strokeWidth="2.6" strokeLinecap="round" />
-        {/* peas */}
-        <circle cx="14.4" cy="21.4" r="2" fill="#0a1407" />
-        <circle cx="20" cy="20" r="2" fill="#0a1407" />
-        <circle cx="25.6" cy="21.4" r="2" fill="#0a1407" />
-      </svg>
-      <span className="text-[1.35rem] leading-none font-extrabold tracking-[-0.02em] text-white">
-        Ponspods
-      </span>
     </span>
   );
 }
@@ -113,8 +108,8 @@ type ButtonProps = {
   className?: string;
 } & Omit<ComponentProps<"button">, "className" | "children">;
 
-export function ButtonLime({ href, children, className = "", ...rest }: ButtonProps) {
-  const cls = `btn-lime inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base ${className}`;
+export function ButtonLight({ href, children, className = "", ...rest }: ButtonProps) {
+  const cls = `btn-light inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-base ${className}`;
   return href ? (
     <Link href={href} className={cls}>
       {children}
@@ -126,8 +121,8 @@ export function ButtonLime({ href, children, className = "", ...rest }: ButtonPr
   );
 }
 
-export function ButtonGhost({ href, children, className = "", ...rest }: ButtonProps) {
-  const cls = `btn-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base ${className}`;
+export function ButtonOutline({ href, children, className = "", ...rest }: ButtonProps) {
+  const cls = `btn-outline inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base ${className}`;
   return href ? (
     <Link href={href} className={cls}>
       {children}
@@ -136,6 +131,35 @@ export function ButtonGhost({ href, children, className = "", ...rest }: ButtonP
     <button className={cls} {...rest}>
       {children}
     </button>
+  );
+}
+
+/** The recurring "open the dapp" call to action. */
+export function OpenDappButton({
+  className = "",
+  label = "Open dApp",
+  size = "lg",
+}: {
+  className?: string;
+  label?: string;
+  size?: "sm" | "lg";
+}) {
+  const pad = size === "sm" ? "px-5 py-2.5 text-sm" : "px-7 py-3.5 text-base";
+  return (
+    <Link href="/app" className={`btn-light group inline-flex items-center gap-2.5 ${pad} ${className}`}>
+      {label}
+      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#040703] transition-transform duration-300 group-hover:translate-x-0.5">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="#ffffff"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </Link>
   );
 }
 
@@ -161,7 +185,7 @@ export function Section({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="chip-lime mb-6 inline-block px-3.5 py-2 text-xs font-extrabold tracking-[0.16em] uppercase">
+    <p className="chip mb-6 inline-block px-3.5 py-2 text-xs font-extrabold tracking-[0.16em] uppercase">
       {children}
     </p>
   );
@@ -172,5 +196,14 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
     <div className={`card-shell h-full ${className}`}>
       <div className="card-inner p-7 sm:p-9">{children}</div>
     </div>
+  );
+}
+
+/** A metric with no value yet. The protocol is not live. */
+export function Pending({ className = "" }: { className?: string }) {
+  return (
+    <span className={`text-sage/50 tnum ${className}`} title="Not live yet">
+      —
+    </span>
   );
 }
